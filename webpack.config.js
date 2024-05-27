@@ -21,6 +21,10 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addStyleEntry('RecipeCardStyles', './assets/styles/RecipeCardStyles.css') // Add CSS entries
+    .addStyleEntry('HeaderStyles', './assets/styles/HeaderStyles.css')
+    .addStyleEntry('slideShow', './assets/styles/slideShow.css')
+    .addStyleEntry('footer', './assets/styles/footer.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -51,6 +55,12 @@ Encore
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
+    })
+
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[name].[ext]',
+        pattern: /\.(jpeg|png|jpg)$/
     })
 
     // enables Sass/SCSS support
