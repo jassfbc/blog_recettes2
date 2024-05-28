@@ -15,7 +15,7 @@ class MainController extends AbstractController
         $this->recipeRepository = $recipeRepository;
     }
 
-    #[Route('/Home', name: 'Home')]
+    #[Route('/Home', methods: ['GET'],  name: 'Home')]
     public function index(): Response
     {
         $recipe = $this->recipeRepository->findAll();
@@ -23,6 +23,18 @@ class MainController extends AbstractController
        
 
         return $this->render('Home.html.twig', [
+            'recipe' => $recipe
+        ]);
+    }
+
+    #[Route('/Home/{id}', methods: ['GET'], name: 'recipe')]
+    public function show($id): Response
+    {
+        $recipe = $this->recipeRepository->find($id);
+        ($recipe);
+       
+
+        return $this->render('show.html.twig', [
             'recipe' => $recipe
         ]);
     }
